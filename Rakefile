@@ -5,7 +5,7 @@ require 'rocco'
 require 'rocco/tasks'
 
 desc "Build Rocco cheatsheets into /public"
-Rocco.make 'public/', ['lib/**/*.rb'], {
+Rocco.make 'public/', ['lib/**/*'], {
   :language      => 'ruby',
   :comment_chars => '#',
   :template_file => nil,
