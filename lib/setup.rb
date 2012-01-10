@@ -1,5 +1,5 @@
-# Aquest *cheatsheet* mostra un exemple de com preparar un entorn
-# de desenvolupament per a treballar amb Ruby/Rails.
+# A continuació es mostra un exemple de com preparar un entorn de desenvolupament
+# per a treballar amb Ruby/Rails
 #
 # Es mostren exemples de com instal.lar: Git, GCC i utilitats en OSX i Linux.
 #
@@ -21,7 +21,7 @@ $ /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
 #### [Git](http://git-scm.org)
 
 # Podem instal.lar [Git](http://git-scm.org) mitjançant un paquet binari
-# directament de la pàgina o bé mitjançant `homebrew`:
+# directament de la pàgina web o bé mitjançant `homebrew`:
 $ brew install git
 
 #### GCC
@@ -31,15 +31,18 @@ $ brew install git
 
 #### Motors de BD
 
-# Podem instal.lar el motor de BD que tinguem pensat utilizar, utilitzant
-# `homebrew` és fàcil:
+# Per a instal.lar el motor de BD que tinguem pensat utilizar utilitzant
+# `homebrew`:
 
-# Instal.la SQLite
+# Instal.lar SQLite
 $ brew install sqlite3
 
-# Instal.la l'RDBMS lliure PostgreSQL. Un cop hagi finalitzat, recordar
+# Instal.lar l'RDBMS lliure PostgreSQL. Un cop hagi finalitzat, recordar
 # seguir les instruccions en pantalla...
 $ brew install postgresql
+
+# Imagemagick
+$ brew install imagemagick
 
 #### Linux (Tipus-Debian)
 
