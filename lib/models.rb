@@ -9,7 +9,7 @@ class Model < ActiveRecord::Base
 
   # Únic amb referència a un camp (àmbit)
   validates :name, :uniqueness => { :scope => :year,
-    :message => "només un cop l'any" }
+    :message => "nomes un cop l'any" }
 
   # Únic amb opcions
   validates :name, :uniqueness => { :case_sensitive => false }
@@ -28,11 +28,11 @@ class Model < ActiveRecord::Base
 
   # Format
   validates :legacy_code, :format => { :with => /\A[a-zA-Z]+\z/,
-    :message => "Només caràcters alfabètics" }
+    :message => "Nomes caracters alfabetics" }
 
   # Inclusió en un rang
   validates :size, :inclusion => { :in => %w(S M L XL),
-    :message => "%{value} no es un tamany vàlid" }
+    :message => "%{value} no es un tamany valid" }
 
   # Nombre
   validates :points, :numericality => true
@@ -41,7 +41,7 @@ class Model < ActiveRecord::Base
   # Permetre blancs / nul
   validates :title, :length => { :is => 5 }, :allow_blank => true
   validates :size, :inclusion => { :in => %w(S M L XL),,
-    :message => "%{value} no es un tamany vàlid" }, :allow_nil => true
+    :message => "%{value} no es un tamany valid" }, :allow_nil => true
 
   # Es pot utilitzar `:on` per especificar quan executar la validació:
   # `:create` o `:update`

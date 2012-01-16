@@ -2,17 +2,24 @@
 
 @posts = Post.where(:published => true)
 if params[:order]
+  # Encara no executem la consulta...
   @posts = @posts.order(params[:order])
 end
 
-# És en aquest moment quan s'executaria la consulta a la BD
-@posts        = Post.order(params[:order])
+...
 
+# És en aquest moment quan s'executaria la consulta a la BD
+@posts.each do |post|
+  ...
+end
+
+# Podem, per tant, realitzar múltiples seleccions sense arribar
+# a tocar la BD
 posts         = Post.order(params[:order])
 @published    = posts.where(:published => true)
 @unpublished  = posts.where(:published => true)
 
-#### Mètodes CRUD
+#### CRUD (Create-Read-Update-Delete)
 #
 #     new(attributes)         delete(id_or_array)
 #     create(attributes)      delete_all
@@ -30,7 +37,7 @@ sports_posts.update_all(:published => false)
 # => true
 sports_posts.exists?
 
-#### Encadenament
+#### Consulta (métodes encadenables)
 #
 # Mètodes encadenables
 #
@@ -55,7 +62,10 @@ sports_posts.exists?
 #### Àmbits (Scopes)
 
 class Post < ActiveRecordd::Base
+  # Àmbit per defecte, s'executarà *sempre*
   default_scope order('title')
+
+  # Crea l'àmbit `Post.published` i `Post.unpublished`
   scope :published, where(:published => true)
   scope :unpublished, where(:published => false)
 end
