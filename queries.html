@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>queries.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="migrations.html">migrations.rb</a>
+          <a class="source" href="models.html">models.rb</a>
+          <a class="source" href="queries.html">queries.rb</a>
+          <a class="source" href="routing.html">routing.rb</a>
+          <a class="source" href="rvm.html">rvm.rb</a>
+          <a class="source" href="setup.html">setup.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>queries.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Lazy_Loading'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Lazy_Loading">&#182;</a>
+        </div>
+        <h3>Lazy Loading</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:order</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Encara no executem la consulta&hellip;</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="vi">@posts</span> <span class="o">=</span> <span class="vi">@posts</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:order</span><span class="o">]</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="o">.</span><span class="n">.</span><span class="o">.</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>És en aquest moment quan s'executaria la consulta a la BD</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="vi">@posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>Podem, per tant, realitzar múltiples seleccions sense arribar
+a tocar la BD</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">posts</span>         <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:order</span><span class="o">]</span><span class="p">)</span>
+<span class="vi">@published</span>    <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+<span class="vi">@unpublished</span>  <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-CRUD_(Create-Read-Update-Delete)'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-CRUD_(Create-Read-Update-Delete)">&#182;</a>
+        </div>
+        <h3>CRUD (Create-Read-Update-Delete)</h3>
+
+<pre><code>new(attributes)         delete(id_or_array)
+create(attributes)      delete_all
+create!(attributes)     update(ids, updates)
+find(id_or_array)       update_all(updates)
+destroy(id_or_array)    exists?
+destroy_all
+</code></pre>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">sports_post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:category</span> <span class="o">=&gt;</span> <span class="s1">&#39;sports&#39;</span><span class="p">)</span>
+<span class="n">new_sports_post</span> <span class="o">=</span> <span class="n">sports_post</span><span class="o">.</span><span class="n">new</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>=> &lsquo;sports&rsquo;</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">new_sports_post</span><span class="o">.</span><span class="n">category</span>
+
+<span class="n">sports_posts</span><span class="o">.</span><span class="n">update_all</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>=> true</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">sports_posts</span><span class="o">.</span><span class="n">exists?</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Consulta_(métodes_encadenables)'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Consulta_(métodes_encadenables)">&#182;</a>
+        </div>
+        <h3>Consulta (métodes encadenables)</h3>
+
+<p>Mètodes encadenables</p>
+
+<pre><code>where
+having
+select
+group
+order
+limit
+offset
+joins
+includes
+lock
+readonly
+from
+</code></pre>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:order</span><span class="o">]</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>Cridar a <code>.all</code> força la execució de la consulta i retorna un array, no
+una relació.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="vi">@joe_posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:author</span> <span class="o">=&gt;</span> <span class="s2">&quot;Joe&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">all</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Àmbits_(Scopes)'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Àmbits_(Scopes)">&#182;</a>
+        </div>
+        <h3>Àmbits (Scopes)</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecordd</span><span class="o">::</span><span class="no">Base</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>Àmbit per defecte, s'executarà <em>sempre</em></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">default_scope</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <p>Crea l'àmbit <code>Post.published</code> i <code>Post.unpublished</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">scope</span> <span class="ss">:published</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+  <span class="n">scope</span> <span class="ss">:unpublished</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-13'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-13">&#182;</a>
+        </div>
+        <p>Podem definir scopes en Rails >= 3 com a mètodes estatics de la classe
+del model</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">default_scope</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+    <span class="k">def</span> <span class="nf">published</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">:published</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">unpublished</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">:unpublished</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>

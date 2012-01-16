@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>models.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="migrations.html">migrations.rb</a>
+          <a class="source" href="models.html">models.rb</a>
+          <a class="source" href="queries.html">queries.rb</a>
+          <a class="source" href="routing.html">routing.rb</a>
+          <a class="source" href="rvm.html">rvm.rb</a>
+          <a class="source" href="setup.html">setup.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>models.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Validacions'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Validacions">&#182;</a>
+        </div>
+        <h3>Validacions</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">Model</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Presència (no pot ser buit)</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:order_id</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>Únic</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:uniqueness</span> <span class="o">=&gt;</span> <span class="kp">true</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>Únic amb referència a un camp (àmbit)</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:uniqueness</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:scope</span> <span class="o">=&gt;</span> <span class="ss">:year</span><span class="p">,</span>
+    <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;nomes un cop l&#39;any&quot;</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>Únic amb opcions</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:uniqueness</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:case_sensitive</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>Longitud</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="ss">:minimum</span>   <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="ss">:maximum</span>   <span class="o">=&gt;</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="ss">:tokenizer</span> <span class="o">=&gt;</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">str</span><span class="o">|</span> <span class="n">str</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="sr">/\w+/</span><span class="p">)</span> <span class="p">},</span>
+    <span class="ss">:too_short</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ha de tenir almenys %{count} paraules&quot;</span><span class="p">,</span>
+    <span class="ss">:too_long</span>  <span class="o">=&gt;</span> <span class="s2">&quot;Ha de tenir com a molt %{count} paraules&quot;</span>
+  <span class="p">}</span>
+  <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span>
+    <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+    <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:within</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">255</span><span class="p">,</span> <span class="ss">:allow_blank</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>Format</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:legacy_code</span><span class="p">,</span> <span class="ss">:format</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="sr">/\A[a-zA-Z]+\z/</span><span class="p">,</span>
+    <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;Nomes caracters alfabetics&quot;</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-8'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-8">&#182;</a>
+        </div>
+        <p>Inclusió en un rang</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:inclusion</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:in</span> <span class="o">=&gt;</span> <span class="sx">%w(S M L XL)</span><span class="p">,</span>
+    <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;%{value} no es un tamany valid&quot;</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>Nombre</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:points</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">validates</span> <span class="ss">:games_played</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:only_integer</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <p>Permetre blancs / nul</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:is</span> <span class="o">=&gt;</span> <span class="mi">5</span> <span class="p">},</span> <span class="ss">:allow_blank</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">validates</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:inclusion</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:in</span> <span class="o">=&gt;</span> <span class="sx">%w(S M L XL)</span><span class="p">,,</span>
+    <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;%{value} no es un tamany valid&quot;</span> <span class="p">},</span> <span class="ss">:allow_nil</span> <span class="o">=&gt;</span> <span class="kp">true</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>Es pot utilitzar <code>:on</code> per especificar quan executar la validació:
+<code>:create</code> o <code>:update</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:uniqueness</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:create</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <p>També es pot condicionar les validacions al resultat d'un mètode (booleà)</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">validates</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:paid_with_card?</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Callbacks'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Callbacks">&#182;</a>
+        </div>
+        <h3>Callbacks</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">validates</span> <span class="ss">:login</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-14'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-14">&#182;</a>
+        </div>
+        <p>Abans de realitzar la validació crida al mètode <code>ensure_login_has_value</code>
+per assegurar que aquest tingui un valor</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">before_validation</span> <span class="ss">:ensure_login_has_a_value</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-15">&#182;</a>
+        </div>
+        <p>Aquests són els callbacks disponibles:</p>
+
+<ul>
+<li><code>before_validation</code></li>
+<li><code>after_validation</code></li>
+<li><code>before_save</code></li>
+<li><code>before_create</code></li>
+<li><code>around_create</code></li>
+<li><code>after_create</code></li>
+<li><code>after_save</code></li>
+<li><code>before_destroy</code></li>
+<li><code>after_destroy</code></li>
+<li><code>around_destroy</code></li>
+</ul>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-16'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-16">&#182;</a>
+        </div>
+        <p>De la mateixa manera que amb les validacions, es pot executar un
+callback de forma condicional amb <code>:if</code>:</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">before_save</span> <span class="ss">:normalize_card_number</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:paid_with_card?</span>
+
+  <span class="kp">protected</span>
+
+  <span class="k">def</span> <span class="nf">ensure_login_has_a_value</span>
+    <span class="k">if</span> <span class="n">login</span><span class="o">.</span><span class="n">nil?</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">login</span> <span class="o">=</span> <span class="n">email</span> <span class="k">unless</span> <span class="n">email</span><span class="o">.</span><span class="n">blank?</span>
+    <span class="k">end</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-17'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-17">&#182;</a>
+        </div>
+        <p>S'utilitza en el callback per a executar-lo o no</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">paid_with_card?</span>
+    <span class="n">order</span><span class="o">.</span><span class="n">payment_method</span> <span class="o">==</span> <span class="s1">&#39;credit_card&#39;</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">normalize_card_number</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-18'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-18">&#182;</a>
+        </div>
+        <p>&hellip;</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
