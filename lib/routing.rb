@@ -72,7 +72,7 @@ constraints(:host => /localhost/) do
 end
 
 # `IpRestrictor` ha d'implementar el mètode `self.matches?(request)`
-constrains IpRestrictor do
+constraints IpRestrictor do
   get 'admin/accounts' => 'secret#accounts'
 end
 
